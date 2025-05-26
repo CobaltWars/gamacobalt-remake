@@ -37,6 +37,6 @@
 - [x] Corriger les éventuels bugs
 
 ## Génération et envoi du site
-- [ ] Construire la version de production
-- [ ] Déployer le site
-- [ ] Fournir le lien et les fichiers source à l'utilisateur
+- [x] Construire la version de production
+- [x] Déployer le site
+- [x] Fournir le lien et les fichiers source à l'utilisateur
