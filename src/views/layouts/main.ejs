@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> | Gamacobalt</title>
+  <link rel="stylesheet" href="/public/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <% if (currentTheme) { %>
+  <script>
+    document.documentElement.setAttribute('data-theme', '<%= currentTheme %>');
+  </script>
+  <% } %>
+</head>
+<body data-theme="<%= currentTheme || 'blue-dark' %>" class="<%= user ? 'user-logged-in' : '' %>">
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">
+          <img src="/public/images/logo.png" alt="Gamacobalt">
+        </a>
+        <nav>
+          <ul>
+            <li><a href="/" class="<%= title === 'Accueil' ? 'active' : '' %>">Accueil</a></li>
+            <li><a href="/jeux" class="<%= title.includes('Jeux') ? 'active' : '' %>">Jeux</a></li>
+            <li><a href="/logiciels" class="<%= title.includes('Logiciels') ? 'active' : '' %>">Logiciels</a></li>
+            <li><a href="/gldf" class="gldf-button <%= title.includes('GLDF') ? 'active' : '' %>">GLDF</a></li>
+            <% if (user) { %>
+              <li><a href="/profile" class="<%= title === 'Profil' ? 'active' : '' %>">Mon Profil</a></li>
+              <li><a href="/auth/logout">Déconnexion</a></li>
+            <% } else { %>
+              <li><a href="/auth/login" class="<%= title === 'Connexion' ? 'active' : '' %>">Connexion</a></li>
+            <% } %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Theme Switcher -->
+  <div class="theme-switcher">
+    <div class="theme-option theme-blue-dark <%= currentTheme === 'blue-dark' ? 'active' : '' %>" data-theme="blue-dark" title="Thème Blue-Dark"></div>
+    <div class="theme-option theme-dark <%= currentTheme === 'dark' ? 'active' : '' %>" data-theme="dark" title="Thème Dark"></div>
+    <div class="theme-option theme-blue-white <%= currentTheme === 'blue-white' ? 'active' : '' %>" data-theme="blue-white" title="Thème Blue-White"></div>
+    <div class="theme-option theme-white <%= currentTheme === 'white' ? 'active' : '' %>" data-theme="white" title="Thème White"></div>
+  </div>
+
+  <!-- Flash Messages -->
+  <% if(success_msg && success_msg.length > 0) { %>
+    <div class="alert alert-success">
+      <%= success_msg %>
+    </div>
+  <% } %>
+
+  <% if(error_msg && error_msg.length > 0) { %>
+    <div class="alert alert-danger">
+      <%= error_msg %>
+    </div>
+  <% } %>
+
+  <% if(error && error.length > 0) { %>
+    <div class="alert alert-danger">
+      <%= error %>
+    </div>
+  <% } %>
+
+  <!-- Main Content -->
+  <main>
+    <%- body %>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="copyright">
+          &copy; 2025 Gamacobalt. Tous droits réservés.
+        </div>
+        <div class="footer-links">
+          <a href="/about">À propos</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/public/js/theme-switcher.js"></script>
+</body>
+</html>

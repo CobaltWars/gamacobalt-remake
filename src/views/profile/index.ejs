@@ -1,0 +1,148 @@
+<%- include('../layouts/main', { title: 'Profil Utilisateur' }) %>
+
+<div class="container">
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <img src="<%= user.avatar || '/public/images/default-avatar.jpg' %>" alt="Avatar de <%= user.username %>">
+      </div>
+      <div class="profile-info">
+        <h1><%= user.username %></h1>
+        <p class="profile-bio"><%= user.bio || 'Aucune biographie disponible.' %></p>
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-value"><%= user.projectCount || 0 %></span>
+            <span class="stat-label">Projets</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value"><%= user.followersCount || 0 %></span>
+            <span class="stat-label">Abonnés</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value"><%= user.followingCount || 0 %></span>
+            <span class="stat-label">Abonnements</span>
+          </div>
+        </div>
+      </div>
+      <% if (currentUser && currentUser.id === user.id) { %>
+        <div class="profile-actions">
+          <a href="/profile/edit" class="button button-secondary">Modifier le profil</a>
+        </div>
+      <% } else if (currentUser) { %>
+        <div class="profile-actions">
+          <button class="button button-secondary follow-button" data-user-id="<%= user.id %>">
+            <%= isFollowing ? 'Se désabonner' : 'S\'abonner' %>
+          </button>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="profile-tabs">
+      <div class="tab active" data-tab="projects">Projets</div>
+      <div class="tab" data-tab="likes">J'aime</div>
+      <div class="tab" data-tab="comments">Commentaires</div>
+    </div>
+
+    <div class="tab-content" id="projects-content">
+      <div class="cards-grid">
+        <% if (projects && projects.length > 0) { %>
+          <% projects.forEach(project => { %>
+            <div class="card">
+              <div class="card-image" style="background-image: url('<%= project.imageUrl || '/public/images/default-project.jpg' %>');"></div>
+              <div class="card-content">
+                <h3 class="card-title"><%= project.title %></h3>
+                <p class="card-description"><%= project.description %></p>
+                <div class="card-meta">
+                  <% project.tags.forEach(tag => { %>
+                    <span class="card-tag"><%= tag %></span>
+                  <% }); %>
+                </div>
+                <a href="/projects/<%= project.id %>" class="button button-primary">Voir le projet</a>
+              </div>
+            </div>
+          <% }); %>
+        <% } else { %>
+          <div class="empty-state">
+            <p>Aucun projet pour le moment.</p>
+            <% if (currentUser && currentUser.id === user.id) { %>
+              <a href="/projects/new" class="button button-primary">Créer un projet</a>
+            <% } %>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="likes-content">
+      <!-- Contenu des likes -->
+      <div class="empty-state">
+        <p>Aucun contenu aimé pour le moment.</p>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="comments-content">
+      <!-- Contenu des commentaires -->
+      <div class="empty-state">
+        <p>Aucun commentaire pour le moment.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const tabName = this.getAttribute('data-tab');
+        
+        // Mettre à jour les onglets actifs
+        tabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Afficher le contenu correspondant
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+          if (content.id === tabName + '-content') {
+            content.classList.remove('hidden');
+          }
+        });
+      });
+    });
+    
+    // Gestion du bouton d'abonnement
+    const followButton = document.querySelector('.follow-button');
+    if (followButton) {
+      followButton.addEventListener('click', function() {
+        const userId = this.getAttribute('data-user-id');
+        const isFollowing = this.textContent.trim() === 'Se désabonner';
+        
+        fetch('/api/follow', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId,
+            action: isFollowing ? 'unfollow' : 'follow'
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            this.textContent = isFollowing ? 'S\'abonner' : 'Se désabonner';
+            
+            // Mettre à jour le compteur d'abonnés
+            const followersCountElement = document.querySelector('.stat-value');
+            let count = parseInt(followersCountElement.textContent);
+            followersCountElement.textContent = isFollowing ? count - 1 : count + 1;
+          }
+        })
+        .catch(error => {
+          console.error('Erreur:', error);
+        });
+      });
+    }
+  });
+</script>

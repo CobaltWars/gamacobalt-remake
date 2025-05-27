@@ -1,0 +1,115 @@
+<%- include('../layouts/main', { title: 'Jeux' }) %>
+
+<div class="container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Nos Jeux</h1>
+    <p>Découvrez notre collection de jeux originaux développés par notre communauté.</p>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="filter-section">
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher un jeu..." class="form-input">
+      <button class="button button-primary">Rechercher</button>
+    </div>
+    <div class="filter-options">
+      <select class="form-input">
+        <option value="">Tous les genres</option>
+        <option value="puzzle">Puzzle</option>
+        <option value="arcade">Arcade</option>
+        <option value="strategy">Stratégie</option>
+        <option value="simulation">Simulation</option>
+      </select>
+      <select class="form-input">
+        <option value="">Trier par</option>
+        <option value="recent">Plus récents</option>
+        <option value="popular">Plus populaires</option>
+        <option value="name">Nom (A-Z)</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Games Grid -->
+  <section>
+    <div class="cards-grid">
+      <% if (locals.games && games.length > 0) { %>
+        <% games.forEach(game => { %>
+          <div class="card">
+            <div class="card-image" style="background-image: url('<%= game.get('imageUrl') || '/public/images/default-game.jpg' %>');"></div>
+            <div class="card-content">
+              <h3 class="card-title"><%= game.get('title') %></h3>
+              <p class="card-description"><%= game.get('description') %></p>
+              <div class="card-meta">
+                <% game.get('tags').forEach(tag => { %>
+                  <span class="card-tag"><%= tag %></span>
+                <% }); %>
+              </div>
+              <a href="/jeux/<%= game.id %>" class="button button-primary">Télécharger</a>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <!-- Contenu statique pour la démo -->
+        <div class="card">
+          <div class="card-image" style="background-image: url('/public/images/game1.jpg');"></div>
+          <div class="card-content">
+            <h3 class="card-title">My Chess</h3>
+            <p class="card-description">Un jeu d'échec très original : il est octogonal et propose de nouvelles règles passionnantes.</p>
+            <div class="card-meta">
+              <span class="card-tag">Stratégie</span>
+              <span class="card-tag">Puzzle</span>
+            </div>
+            <a href="#" class="button button-primary">Télécharger</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background-image: url('/public/images/game2.jpg');"></div>
+          <div class="card-content">
+            <h3 class="card-title">Flappy Bird Remastered</h3>
+            <p class="card-description">Le bon vieux Flappy Bird, mais en 10x mieux avec de nouveaux graphismes et modes de jeu.</p>
+            <div class="card-meta">
+              <span class="card-tag">Arcade</span>
+              <span class="card-tag">Casual</span>
+            </div>
+            <a href="#" class="button button-primary">Télécharger</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background-image: url('/public/images/game3.jpg');"></div>
+          <div class="card-content">
+            <h3 class="card-title">Towers Escape</h3>
+            <p class="card-description">Un remix du dino-game, mais seulement votre skill sera mis à rude épreuve !</p>
+            <div class="card-meta">
+              <span class="card-tag">Arcade</span>
+              <span class="card-tag">Action</span>
+            </div>
+            <a href="#" class="button button-primary">Télécharger</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background-image: url('/public/images/game4.jpg');"></div>
+          <div class="card-content">
+            <h3 class="card-title">Conway's Game of Life</h3>
+            <p class="card-description">Plongez dans une simulation du jeu imaginé par John Horton Conway avec des fonctionnalités avancées.</p>
+            <div class="card-meta">
+              <span class="card-tag">Simulation</span>
+              <span class="card-tag">Éducatif</span>
+            </div>
+            <a href="#" class="button button-primary">Jouer en ligne</a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </section>
+
+  <!-- Pagination -->
+  <section class="pagination">
+    <a href="#" class="pagination-item active">1</a>
+    <a href="#" class="pagination-item">2</a>
+    <a href="#" class="pagination-item">3</a>
+    <span class="pagination-separator">...</span>
+    <a href="#" class="pagination-item">10</a>
+    <a href="#" class="pagination-item pagination-next">Suivant &raquo;</a>
+  </section>
+</div>

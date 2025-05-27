@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gamacobalt - Accueil</title>
+  <title>Gamacobalt - GLDF Communauté</title>
   <link rel="stylesheet" href="public/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -17,10 +17,10 @@
         </a>
         <nav>
           <ul>
-            <li><a href="index.html" class="active">Accueil</a></li>
+            <li><a href="index.html">Accueil</a></li>
             <li><a href="jeux.html">Jeux</a></li>
             <li><a href="logiciels.html">Logiciels</a></li>
-            <li><a href="gldf.html" class="gldf-button">GLDF</a></li>
+            <li><a href="gldf.html" class="gldf-button active">GLDF</a></li>
             <li><a href="login.html">Connexion</a></li>
           </ul>
         </nav>
@@ -41,52 +41,98 @@
     <div class="container">
       <!-- Hero Section -->
       <section class="hero">
-        <h1>Bienvenue dans l'univers des gamers</h1>
-        <p>Découvrez les créations, développement de logiciels et de jeux vidéos, par une communauté passionnée.</p>
+        <h1>GLDF Communauté</h1>
+        <p>Rejoignez notre communauté de créateurs passionnés, partagez vos projets et découvrez les créations des autres membres.</p>
         <div class="cta-buttons">
-          <a href="jeux.html" class="button button-primary">Découvrir nos jeux</a>
-          <a href="logiciels.html" class="button button-secondary">Explorer nos logiciels</a>
+          <a href="register.html" class="button button-primary">Créer un compte</a>
+          <a href="login.html" class="button button-secondary">Se connecter</a>
         </div>
       </section>
 
-      <!-- Featured Projects -->
+      <!-- Featured Community Projects -->
       <section>
-        <h2>Projets à la une</h2>
+        <h2>Projets communautaires récents</h2>
         <div class="cards-grid">
           <div class="card">
-            <div class="card-image" style="background-image: url('public/images/project1.jpg');"></div>
+            <div class="card-image" style="background-image: url('public/images/community1.jpg');"></div>
             <div class="card-content">
-              <h3 class="card-title">My Chess</h3>
-              <p class="card-description">Un jeu d'échec original avec un plateau octogonal qui redéfinit les règles classiques.</p>
+              <h3 class="card-title">Pixel Adventure</h3>
+              <p class="card-description">Un jeu de plateforme en pixel art avec des niveaux générés procéduralement.</p>
+              <div class="card-author">Par <a href="#">MathieuDev</a></div>
               <a href="#" class="button button-primary">Voir le projet</a>
             </div>
           </div>
           <div class="card">
-            <div class="card-image" style="background-image: url('public/images/project2.jpg');"></div>
+            <div class="card-image" style="background-image: url('public/images/community2.jpg');"></div>
             <div class="card-content">
-              <h3 class="card-title">Flappy Bird Remastered</h3>
-              <p class="card-description">Le bon vieux Flappy Bird, mais en 10x mieux avec de nouveaux graphismes et modes de jeu.</p>
+              <h3 class="card-title">CodeHelper</h3>
+              <p class="card-description">Extension VSCode pour faciliter le développement de jeux en JavaScript.</p>
+              <div class="card-author">Par <a href="#">SophieCode</a></div>
               <a href="#" class="button button-primary">Voir le projet</a>
             </div>
           </div>
           <div class="card">
-            <div class="card-image" style="background-image: url('public/images/project3.jpg');"></div>
+            <div class="card-image" style="background-image: url('public/images/community3.jpg');"></div>
             <div class="card-content">
-              <h3 class="card-title">Genesis</h3>
-              <p class="card-description">Un navigateur web fait maison avec des fonctionnalités uniques pour les développeurs.</p>
+              <h3 class="card-title">SoundScape</h3>
+              <p class="card-description">Générateur de musique ambiance pour les jeux vidéo et applications.</p>
+              <div class="card-author">Par <a href="#">AudioMaster</a></div>
               <a href="#" class="button button-primary">Voir le projet</a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Community Section -->
+      <!-- How It Works -->
       <section>
-        <h2>Rejoignez la communauté GLDF</h2>
-        <p>Partagez vos projets, collaborez avec d'autres créateurs et découvrez de nouvelles inspirations.</p>
-        <div class="cta-buttons">
-          <a href="register.html" class="button button-primary">S'inscrire</a>
-          <a href="gldf.html" class="button button-secondary">En savoir plus</a>
+        <h2>Comment ça marche</h2>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="feature-icon">1</div>
+            <h3>Créez un compte</h3>
+            <p>Inscrivez-vous gratuitement pour rejoindre notre communauté de développeurs et créateurs.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">2</div>
+            <h3>Partagez vos projets</h3>
+            <p>Publiez vos jeux, logiciels, ou autres créations avec des images, vidéos et descriptions.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">3</div>
+            <h3>Connectez-vous</h3>
+            <p>Interagissez avec d'autres créateurs, recevez des commentaires et collaborez sur des projets.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories -->
+      <section>
+        <h2>Catégories</h2>
+        <div class="category-grid">
+          <a href="#" class="category-item">
+            <div class="category-icon">🎮</div>
+            <h3>Jeux</h3>
+          </a>
+          <a href="#" class="category-item">
+            <div class="category-icon">💻</div>
+            <h3>Logiciels</h3>
+          </a>
+          <a href="#" class="category-item">
+            <div class="category-icon">🎨</div>
+            <h3>Art & Design</h3>
+          </a>
+          <a href="#" class="category-item">
+            <div class="category-icon">🔊</div>
+            <h3>Audio</h3>
+          </a>
+          <a href="#" class="category-item">
+            <div class="category-icon">📱</div>
+            <h3>Mobile</h3>
+          </a>
+          <a href="#" class="category-item">
+            <div class="category-icon">🌐</div>
+            <h3>Web</h3>
+          </a>
         </div>
       </section>
     </div>
